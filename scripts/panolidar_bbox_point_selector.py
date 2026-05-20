@@ -33,11 +33,11 @@ from std_msgs.msg import Header
 from spherical_lidar_camera import transform_points, xyz_array_from_lidar_msg
 
 
-DEFAULT_LIDAR_TOPIC = "/lidar_360/lidar"
+DEFAULT_LIDAR_TOPIC = "/livox/lidar"
 DEFAULT_IMAGE_TOPIC = "/image_raw"
 DEFAULT_OUTPUT_TOPIC = "/vis_selected_points"
-DEFAULT_TARGET_FRAME = "camera_360_link"
-DEFAULT_SOURCE_FRAME = "lidar_360"
+DEFAULT_TARGET_FRAME = "z1_link"
+DEFAULT_SOURCE_FRAME = "livox_link"
 DEFAULT_CALIBRATION_PATH = Path(__file__).resolve().parents[1] / "config" / "panolidar_calibration_params.json"
 
 
@@ -433,7 +433,7 @@ def ros_image_to_rgb(msg):
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Draw a bbox on the 360 camera 360 image and publish matching lidar points."
+        description="Draw a bbox on the 360 camera image and publish matching lidar points."
     )
     parser.add_argument("--lidar-topic", default=DEFAULT_LIDAR_TOPIC)
     parser.add_argument("--image-topic", default=DEFAULT_IMAGE_TOPIC)

@@ -58,7 +58,7 @@ except ImportError:  # Allows importing the math helpers outside a ROS environme
 
 AngleRange = Tuple[float, float]
 WINDOW_NAME = "camera_360_link spherical point selector"
-DEFAULT_LIDAR_TOPIC = "/lidar_360/lidar"
+DEFAULT_LIDAR_TOPIC = "/livox/lidar"
 DEFAULT_OUTPUT_TOPIC = "/vis_selected_points"
 cv2 = None
 
@@ -192,8 +192,8 @@ def lidar_points_in_spherical_bbox(
 def lookup_target_from_lidar_transform(
     tf_buffer,
     stamp,
-    lidar_frame: str = "lidar_360_link",
-    target_frame: str = "camera_360_link",
+    lidar_frame: str = "livox_link",
+    target_frame: str = "z1_link",
     timeout_sec: float = 0.05,
 ):
     """
@@ -446,8 +446,8 @@ def parse_args():
     )
     parser.add_argument("--lidar-topic", default=DEFAULT_LIDAR_TOPIC)
     parser.add_argument("--output-topic", default=DEFAULT_OUTPUT_TOPIC)
-    parser.add_argument("--target-frame", default="camera_360_link")
-    parser.add_argument("--source-frame", default="lidar_360_link", help="Fallback source frame if the lidar message frame_id is empty.")
+    parser.add_argument("--target-frame", default="z1_link")
+    parser.add_argument("--source-frame", default="livox_link", help="Fallback source frame if the lidar message frame_id is empty.")
     parser.add_argument("--azimuth-min", type=float, default=-15.0)
     parser.add_argument("--azimuth-max", type=float, default=15.0)
     parser.add_argument("--elevation-min", type=float, default=-10.0)

@@ -61,7 +61,17 @@ Your lidar driver must publish either `sensor_msgs/msg/PointCloud2` or a custom 
 
 ## Frames
 
-The generic default frames are:
+The current defaults match the original development robot:
+
+```text
+lidar topic:         /livox/lidar
+lidar source frame:  livox_link
+camera target frame: z1_link
+robot output frame:  base_link
+image topic:         /image_raw
+```
+
+For a more generic robot, use names like:
 
 ```text
 lidar source frame:  lidar_360_link
@@ -109,7 +119,7 @@ Verify TF:
 ros2 run tf2_ros tf2_echo camera_360_link lidar_360_link
 ```
 
-If your hardware already uses names such as `livox_link` or `z1_link`, either rename your TF frames or pass the actual frame names through the command-line arguments.
+If your hardware uses the generic names, pass them through the command-line arguments or update the defaults in the scripts.
 
 ## Build
 
@@ -135,14 +145,14 @@ Run:
 ```bash
 cd ~/Playground/panolidar
 python3 scripts/panolidar_calibration_viewer.py \
-  --lidar-topic /lidar_360/lidar \
+  --lidar-topic /livox/lidar \
   --image-topic /image_raw \
-  --target-frame camera_360_link \
-  --source-frame lidar_360_link \
+  --target-frame z1_link \
+  --source-frame livox_link \
   --calibration-path config/panolidar_calibration_params.json
 ```
 
-The calibration file stores yaw, pitch, and roll for the stitched 360 image orientation relative to `camera_360_link`.
+The calibration file stores yaw, pitch, and roll for the stitched 360 image orientation relative to the camera frame, `z1_link` by default.
 
 ```json
 {
@@ -165,11 +175,11 @@ Run:
 
 ```bash
 python3 scripts/panolidar_bbox_point_selector.py \
-  --lidar-topic /lidar_360/lidar \
+  --lidar-topic /livox/lidar \
   --image-topic /image_raw \
   --output-topic /vis_selected_points \
-  --target-frame camera_360_link \
-  --source-frame lidar_360_link \
+  --target-frame z1_link \
+  --source-frame livox_link \
   --calibration-path config/panolidar_calibration_params.json
 ```
 
@@ -177,7 +187,7 @@ Drag a rectangle on the 360 image. The script:
 
 1. Converts the pixel bbox to equirectangular yaw/elevation bounds.
 2. Applies the saved image rotation calibration.
-3. Transforms incoming lidar points into `camera_360_link`.
+3. Transforms incoming lidar points into the camera frame, `z1_link` by default.
 4. Selects points whose direction falls inside the bbox.
 5. Publishes selected points to `/vis_selected_points`.
 
@@ -185,7 +195,7 @@ In RViz, add a `PointCloud2` display:
 
 ```text
 Topic: /vis_selected_points
-Fixed frame: camera_360_link
+Fixed frame: z1_link
 ```
 
 ## Run BBox Inference Services
@@ -195,9 +205,9 @@ Start the service node:
 ```bash
 source ~/Playground/install/setup.bash
 ros2 run panolidar panolidar_bbox_inference_node.py \
-  --lidar-topic /lidar_360/lidar \
-  --source-frame lidar_360_link \
-  --camera-frame camera_360_link \
+  --lidar-topic /livox/lidar \
+  --source-frame livox_link \
+  --camera-frame z1_link \
   --default-frame base_link \
   --calibration-path ~/Playground/panolidar/config/panolidar_calibration_params.json
 ```

@@ -49,9 +49,9 @@ except ImportError as exc:
     ) from exc
 
 
-DEFAULT_LIDAR_TOPIC = "/lidar_360/lidar"
-DEFAULT_SOURCE_FRAME = "lidar_360_link"
-DEFAULT_CAMERA_FRAME = "camera_360_link"
+DEFAULT_LIDAR_TOPIC = "/livox/lidar"
+DEFAULT_SOURCE_FRAME = "livox_link"
+DEFAULT_CAMERA_FRAME = "z1_link"
 DEFAULT_OUTPUT_FRAME = "base_link"
 DEFAULT_SELECTED_POINTS_TOPIC = "/vis_bbox_selected_points"
 DEFAULT_USED_POINTS_TOPIC = "/vis_bbox_used_points"

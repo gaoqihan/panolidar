@@ -5,7 +5,7 @@
   "patch_yaw_min": -52.0,
   "pitch": -6.0,
   "roll": -180.0,
-  "source_frame": "lidar_360_link",
-  "target_frame": "camera_360_link",
+  "source_frame": "livox_link",
+  "target_frame": "z1_link",
   "yaw": -1.0
 }
