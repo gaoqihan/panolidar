@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <link name="lidar_360_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.03"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="lidar_360_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_360_link"/>
+    <!-- Replace xyz and rpy with your lidar mounting pose. -->
+    <origin xyz="0.174 0.0 0.153" rpy="0 0 0"/>
+  </joint>
+
+  <link name="camera_360_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.03"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="camera_360_joint" type="fixed">
+    <parent link="lidar_360_link"/>
+    <child link="camera_360_link"/>
+    <!-- Replace xyz and rpy with your 360 camera mounting pose. -->
+    <origin xyz="-0.04 0.05 0.30" rpy="0 0 0"/>
+  </joint>
+</robot>

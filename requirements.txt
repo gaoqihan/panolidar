@@ -1,0 +1,5 @@
+numpy
+Pillow
+PyQt5
+vtk
+

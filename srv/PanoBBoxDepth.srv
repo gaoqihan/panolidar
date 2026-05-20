@@ -1,0 +1,26 @@
+# Pixel-space bounding box in the 360 camera equirectangular image.
+float32 x_min
+float32 y_min
+float32 x_max
+float32 y_max
+uint32 image_width
+uint32 image_height
+
+# Optional output frame. Empty means use the node's default_frame parameter.
+string frame_id
+
+# Aggregation: "center_k", "all", or "main_cluster". Empty means node default.
+string method
+uint32 k
+
+# Outlier filter: "none", "mad_range", "statistical", or "radius". Empty means node default.
+string outlier_filter
+---
+bool valid
+string message
+uint32 input_count
+uint32 selected_count
+uint32 used_count
+
+# Euclidean range from frame origin to the representative point.
+float32 depth_m

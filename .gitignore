@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.bag
+*.db3
+*.mcap
+lidar_camera_calibration_data/
+
